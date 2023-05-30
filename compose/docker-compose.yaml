@@ -1,0 +1,34 @@
+version: '3'
+services:
+  web:
+    build: ../app
+    container_name: my-blog-server
+    restart: always
+    ports:
+      - "8086:28083"
+    depends_on:
+      - mysql
+    networks:
+      - blognet
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    volumes:
+      - ../mysql/my.cnf:/etc/mysql/my.cnf
+      - ../mysql/data:/var/lib/mysql
+      - ../mysql/log:/var/log/mysql
+      - ../mysql/data/my_blog_db.sql:/my_blog_db.sql        
+    entrypoint: bash -c "chown -R mysql:mysql /var/lib/mysql /var/log/mysql && exec /entrypoint.sh mysqld"
+    environment:
+      MYSQL_DATABASE: my_blog_db #创建一个初始的空数据库，名为webserver
+      MYSQL_ROOT_USER: root #root用户
+      MYSQL_ROOT_PASSWORD: yuan2023 #root密码
+      MYSQL_ROOT_HOST: '%' 
+      TZ: Asia/Shanghai #时区
+    networks:
+      - blognet
+networks:
+  blognet:
+    driver: bridge
+
