@@ -23,7 +23,7 @@ services:
     environment:
       MYSQL_DATABASE: my_blog_db #创建一个初始的空数据库，名为webserver
       MYSQL_ROOT_USER: root #root用户
-      MYSQL_ROOT_PASSWORD: yuan2023 #root密码
+      MYSQL_ROOT_PASSWORD: [替换成你的密码] #root密码
       MYSQL_ROOT_HOST: '%' 
       TZ: Asia/Shanghai #时区
     networks:

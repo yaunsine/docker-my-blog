@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-MAINTAINER "维护者 <email>"
+MAINTAINER "yaunsine <email>"
 LABEL description="blog imagec"
 WORKDIR app
 # RUN apt-get update && apt-get install -y fontconfig
